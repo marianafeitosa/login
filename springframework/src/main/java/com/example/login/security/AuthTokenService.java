@@ -23,11 +23,13 @@ public class AuthTokenService {
     }
 
     public Token gerar(String username, String password) {
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
         );
 
         UserDetails user = userDetailsService.loadUserByUsername(username);
+
         String token = jwtSecurity.generateToken(user);
 
         return new Token(token);
